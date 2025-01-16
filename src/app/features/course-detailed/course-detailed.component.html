@@ -1,0 +1,6 @@
+<div *ngIf="course">
+    <h1>{{ course.name }}</h1>
+    <p>{{ course.description }}</p>
+    <p><strong>Duration:</strong> {{ course.duration }} minutes</p>
+    <markdown [data]="course.contentMarkdown"></markdown>
+</div>
