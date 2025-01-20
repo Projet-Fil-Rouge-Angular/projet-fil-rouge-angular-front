@@ -1,6 +1,28 @@
-<div *ngIf="course">
-    <h1>{{ course.name }}</h1>
-    <p>{{ course.description }}</p>
-    <p><strong>Duration:</strong> {{ course.duration }} minutes</p>
-    <markdown [data]="course.contentMarkdown"></markdown>
+<div *ngIf="course" class="course-container">
+    <header>
+        <h1>{{ course.name }}</h1>
+        <p class="course-level">{{ course.level }}</p>
+    </header>
+    <p class="course-description">{{ course.description }}</p>
+    <section class="course-details">
+        <div class="details-group">
+            <h2>Prérequis</h2>
+            <ul>
+                <li *ngFor="let prereq of course.prerequisites">{{ prereq }}</li>
+            </ul>
+        </div>
+        <div class="details-group">
+            <h2>Tags</h2>
+            <ul>
+                <li *ngFor="let tag of course.tags">{{ tag }}</li>
+            </ul>
+        </div>
+        <div class="details-group">
+            <h2>Durée</h2>
+            <p>{{ course.duration }} {{ course.durationUnit }}</p>
+        </div>
+    </section>
+    <section class="course-content">
+        <markdown [data]="course.contentMarkdown"></markdown>
+    </section>
 </div>
