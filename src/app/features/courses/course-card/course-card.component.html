@@ -1,0 +1,12 @@
+<div class="course-card">
+  <div class="course-title">
+    <h2>{{ course.name }}</h2>
+    <img [src]="course.imageUrl" alt="course.imageUrl" style="width: 40px" />
+  </div>
+  <div class="course-card-content">
+    <p>{{ course.description }}</p>
+  </div>
+  <div class="course-card-actions">
+    <button [routerLink]="['/courses', course.id]">Voir les détails</button>
+  </div>
+</div>

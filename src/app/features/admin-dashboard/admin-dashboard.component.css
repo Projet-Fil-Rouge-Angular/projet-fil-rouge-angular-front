@@ -119,7 +119,6 @@
     background-color: #218838;
   }
   
-  /* Responsive Design */
   @media (max-width: 768px) {
     .course-list {
       flex-direction: column;

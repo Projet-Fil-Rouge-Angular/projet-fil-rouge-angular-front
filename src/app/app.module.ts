@@ -7,17 +7,16 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 
 import { AppComponent } from './app.component';
-import { CoursesComponent } from './features/courses/courses.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { CourseDetailedComponent } from './features/course-detailed/course-detailed.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './features/home/home.component';
+import { CoursesModule } from './features/courses/courses.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoursesComponent,
     CourseDetailedComponent,
     HeaderComponent,
     FooterComponent,
@@ -28,6 +27,7 @@ import { HomeComponent } from './features/home/home.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    CoursesModule,
     MarkdownModule.forRoot({ loader: HttpClient })
   ],
   providers: [

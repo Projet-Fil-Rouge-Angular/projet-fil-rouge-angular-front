@@ -4,6 +4,7 @@
   margin-top: 60px;
 }
 
+/* Header */
 .home-header {
   background-color: #f4f4f4;
   padding: 40px;
@@ -39,6 +40,25 @@
   background-color: #0056b3;
 }
 
+/* Introduction */
+.intro {
+  margin: 40px 0;
+  text-align: center;
+}
+
+.intro h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.intro p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Features Section */
 .features {
   display: flex;
   justify-content: center;
@@ -68,6 +88,40 @@
   color: #666;
 }
 
+/* Testimonials */
+.testimonials {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.testimonials h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.testimonial {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.testimonial .author {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .home-header h1 {
     font-size: 2rem;
@@ -90,20 +144,8 @@
     margin-bottom: 20px;
     max-width: 100%;
   }
-}
 
-@media (max-width: 480px) {
-  .home-header {
-    padding: 20px;
-  }
-
-  .home-header h1 {
-    font-size: 1.8rem;
-  }
-
-  .cta-button {
-    padding: 6px 12px;
-    font-size: 0.85rem;
+  .testimonial {
+    padding: 15px;
   }
 }
-  
