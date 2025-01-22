@@ -1,48 +1,42 @@
-/* Conteneur principal */
 .login-container {
-    max-width: 400px; /* Largeur maximale pour centrer le formulaire */
-    margin: 50px auto; /* Centrer horizontalement et ajouter un espacement en haut */
+    max-width: 400px;
+    margin: 50px auto;
     padding: 20px;
-    background-color: #f9f9f9; /* Fond clair */
+    background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
-    text-align: center; /* Centrer le texte par défaut */
+    text-align: center;
   }
   
-  /* Titre */
   .login-container h2 {
     font-size: 1.8rem;
     margin-bottom: 20px;
     color: #333;
   }
   
-  /* Formulaire */
   form {
     display: flex;
     flex-direction: column;
     gap: 15px;
   }
   
-  /* Champs d'entrée */
   input {
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 100%; /* Champ prend toute la largeur */
-    box-sizing: border-box; /* Inclut padding et bordures */
+    width: 100%;
+    box-sizing: border-box;
   }
   
-  /* Label des champs */
   label {
     font-weight: bold;
     margin-bottom: 5px;
-    text-align: left; /* Aligne les labels à gauche */
+    text-align: left;
     display: block;
   }
   
-  /* Bouton de soumission */
   button {
     padding: 10px 15px;
     font-size: 1rem;
@@ -58,17 +52,15 @@
     background-color: #0056b3;
   }
   
-  /* Message d'erreur */
   .error {
     color: red;
     font-size: 0.9rem;
     margin-top: 10px;
   }
   
-  /* Responsive : petits écrans */
   @media (max-width: 768px) {
     .login-container {
-      margin: 20px auto; /* Réduit l'espacement supérieur */
+      margin: 20px auto;
       padding: 15px;
     }
   

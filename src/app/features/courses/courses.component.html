@@ -1,15 +1,24 @@
 <div class="courses-container">
-    <div *ngFor="let course of courses" class="course-card">
-        <div class="course-title">
-            <h2>{{ course.name }}</h2>
-            <img [src]="course.imageUrl" alt="course.imageUrl" style = "width: 40px;"/>
-        </div>
-        <div class = "course-card-content">
-            <p>{{ course.description }}</p>
+  <h1>Liste des Cours Disponibles</h1>
+  <p>
+    Découvrez nos cours soigneusement conçus pour vous aider à atteindre vos
+    objectifs. Chaque cours est enrichi de contenu et adapté à votre niveau.
+  </p>
+  <p>
+    Que vous soyez débutant, intermédiaire ou avancé, vous trouverez un cours
+    qui répond à vos besoins.
+  </p>
 
-        </div>
-        <div class="course-card-actions">
-            <button [routerLink]="['/courses', course.id]">View Details</button>
-        </div>
-    </div>
+  <div class="courses-list">
+    <app-course-card
+      *ngFor="let course of courses"
+      [course]="course"
+    ></app-course-card>
+  </div>
+
+  <p>
+    Vous souhaitez en savoir plus sur nos programmes ? Cliquez sur "Voir les
+    détails" pour explorer le contenu complet de chaque cours. Profitez d'une
+    expérience d'apprentissage inégalée avec nos formateurs experts.
+  </p>
 </div>

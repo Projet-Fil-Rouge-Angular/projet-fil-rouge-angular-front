@@ -1,12 +1,10 @@
-/* Conteneur du formulaire */
 .course-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    padding-right: 10px; /* Pour éviter le chevauchement avec la scrollbar */
+    padding-right: 10px;
   }
   
-  /* Champs d'entrée */
   input,
   textarea,
   select {
@@ -18,7 +16,6 @@
     box-sizing: border-box;
   }
   
-  /* Champ de texte plus grand pour description et contenu Markdown */
   textarea {
     resize: vertical;
     min-height: 150px;
@@ -34,13 +31,12 @@
     padding: 10px;
   }
   
-  /* Liste des tags et prérequis */
   .chip-list {
     list-style: none;
     padding: 0;
     display: flex;
     gap: 10px;
-    flex-wrap: wrap; /* Retour à la ligne si nécessaire */
+    flex-wrap: wrap;
   }
   
   .chip-list li {
@@ -61,7 +57,6 @@
     cursor: pointer;
   }
   
-  /* Boutons */
   button {
     padding: 10px 15px;
     font-size: 1rem;
