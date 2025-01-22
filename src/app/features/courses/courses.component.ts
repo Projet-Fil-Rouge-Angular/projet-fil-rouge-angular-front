@@ -24,12 +24,4 @@ export class CoursesComponent implements OnInit {
       }
     });
   }
-
-  deleteCourse(id: number) {
-    this.coursesService.deleteCourse(id.toString()).subscribe((response: any) => {
-      if (response.statusCode === 200) {
-        this.courses = this.courses.filter(course => course.id !== id);
-      }
-    });
-  }
 }
