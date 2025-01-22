@@ -1,59 +1,108 @@
-# ProjetFilRougeAngularFront
+# 🌟 Bienvenue sur le Projet Fil Rouge Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+Ce projet est une application complète basée sur Angular et une API Node.js. Elle permet de gérer des cours en ligne, avec un tableau de bord administrateur, une authentification JWT, et plus encore.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Comment démarrer ?
 
-```bash
-ng serve
-```
+Pour exécuter ce projet localement, vous devez configurer deux parties : **l'API (back-end)** et **le front-end**. Suivez les étapes ci-dessous.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+### 🖥️ 1. Cloner et démarrer l'API
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. Clonez le dépôt de l'API en utilisant la commande suivante :
+   ```bash
+   git clone https://github.com/Projet-Fil-Rouge-Angular/projet-fil-rouge-angular-api.git
+   ```
+2. Accédez au dossier cloné :
+   ```bash
+   cd projet-fil-rouge-angular-api
+   ```
+3. Installez les dépendances nécessaires :
+   ```bash
+   npm install
+   ```
+4. Démarrez l'API en mode développement :
+   ```bash
+   npm run start
+   ```
+5. Par défaut, l'API sera accessible sur [http://localhost:3000](http://localhost:3000).
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 🌐 2. Cloner et démarrer le front-end
 
-```bash
-ng generate --help
-```
+1. Clonez le dépôt du front-end en utilisant la commande suivante :
+   ```bash
+   git clone https://github.com/Projet-Fil-Rouge-Angular/projet-fil-rouge-angular-front.git
+   ```
+2. Accédez au dossier cloné :
+   ```bash
+   cd projet-fil-rouge-angular-front
+   ```
+3. Installez les dépendances nécessaires :
+   ```bash
+   npm install
+   ```
+4. Lancez l'application Angular :
+   ```bash
+   ng serve
+   ```
+5. Par défaut, l'application sera accessible sur [http://localhost:4200](http://localhost:4200).
 
-## Building
+---
 
-To build the project run:
+## 📂 Structure des Dépôts
 
-```bash
-ng build
-```
+1. **API (Back-end)** :
+   - Lien : [projet-fil-rouge-angular-api](https://github.com/Projet-Fil-Rouge-Angular/projet-fil-rouge-angular-api.git)
+   - Technologie : Node.js, Express, MongoDB
+   - Port par défaut : 3000
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+2. **Front-end (Application Angular)** :
+   - Lien : [projet-fil-rouge-angular-front](https://github.com/Projet-Fil-Rouge-Angular/projet-fil-rouge-angular-front.git)
+   - Technologie : Angular
+   - Port par défaut : 4200
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🚀 Fonctionnalités Clés
 
-```bash
-ng test
-```
+- Gestion des cours (CRUD)
+- Authentification utilisateur avec JWT
+- Tableau de bord administrateur
+- Design responsive adapté à tous les écrans
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## ✏️ Contribuer
 
-```bash
-ng e2e
-```
+Nous accueillons volontiers les contributions de la communauté ! Pour contribuer :
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+1. **Forkez le dépôt** : Cliquez sur le bouton "Fork" en haut à droite.
+2. **Clonez votre fork** :
+   ```bash
+   git clone https://github.com/votre-utilisateur/projet-fil-rouge-angular-front.git
+   ```
+3. **Créez une branche** :
+   ```bash
+   git checkout -b feature/nom-de-votre-fonctionnalite
+   ```
+4. **Soumettez une Pull Request** : Une fois vos modifications terminées, ouvrez une PR vers la branche principale.
 
-## Additional Resources
+Merci pour votre intérêt et votre soutien à ce projet !
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## 🔗 Liens Utiles
+
+- [Documentation Officielle Angular](https://angular.io/docs)
+- [Site Officiel Node.js](https://nodejs.org/)
+- [MongoDB Documentation](https://www.mongodb.com/docs/)
+
+---
+
+✨ **Bon développement !**
+
