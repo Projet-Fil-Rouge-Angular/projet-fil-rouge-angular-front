@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -8,16 +8,30 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username = '';
   password = '';
   errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin() {
+  ngOnInit(): void {
+    this.authService.validateToken().subscribe({
+      next: (isValid) => {
+        if (isValid) {
+          this.router.navigate(['/admin-dashboard']);
+        }
+      },
+      error: () => {
+        this.router.navigate(['/login']);
+      },
+    });
+  }
+
+  onLogin(): void {
     this.authService.login(this.username, this.password).subscribe({
-      next: () => {
+      next: (response) => {
+        localStorage.setItem('authToken', response.access_token);
         this.router.navigate(['/admin-dashboard']);
       },
       error: () => {
