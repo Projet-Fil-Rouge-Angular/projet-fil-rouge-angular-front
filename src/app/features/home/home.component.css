@@ -10,11 +10,11 @@
     border-radius: 8px;
     margin-bottom: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: left; /* Alignement à gauche pour correspondre à une mise en page classique */
+    text-align: center; /* Centré sur mobile */
   }
   
   .home-header h1 {
-    font-size: 2.5rem;
+    font-size: 2.5rem; /* Taille par défaut pour les grands écrans */
     margin-bottom: 10px;
     color: #333;
   }
@@ -41,9 +41,10 @@
   
   .features {
     display: flex;
-    justify-content: flex-start; /* Aligne les fonctionnalités sur la gauche */
+    justify-content: center;
     gap: 20px;
     margin-top: 30px;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne sur mobile */
   }
   
   .feature {
@@ -52,7 +53,8 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     flex: 1;
-    max-width: 300px;
+    min-width: 250px; /* Assure un minimum de largeur pour les petites cartes */
+    max-width: 300px; /* Taille maximale */
   }
   
   .feature h2 {
@@ -64,5 +66,45 @@
   .feature p {
     font-size: 1rem;
     color: #666;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .home-header h1 {
+      font-size: 2rem; /* Réduction de la taille du texte */
+    }
+  
+    .home-header p {
+      font-size: 1rem;
+    }
+  
+    .cta-button {
+      font-size: 0.9rem;
+      padding: 8px 16px; /* Bouton plus petit */
+    }
+  
+    .features {
+      justify-content: flex-start; /* Alignement gauche pour petits écrans */
+    }
+  
+    .feature {
+      margin-bottom: 20px; /* Espace entre les cartes sur mobile */
+      max-width: 100%; /* Les cartes prennent toute la largeur */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .home-header {
+      padding: 20px; /* Moins d'espace sur les petits écrans */
+    }
+  
+    .home-header h1 {
+      font-size: 1.8rem;
+    }
+  
+    .cta-button {
+      padding: 6px 12px; /* Bouton plus compact */
+      font-size: 0.85rem;
+    }
   }
   
