@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { Observable } from 'rxjs';
+import { Course } from '../../models/courses/course.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +10,11 @@ import { environment } from '../../../../environments/environment';
 export class CoursesService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
-    console.log(this.apiUrl)
-  }
+  constructor(private http: HttpClient) {}
 
-  getCourses() {
-    return this.http.get(`${this.apiUrl}/courses`);
+  getCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.apiUrl}/courses`);
+
   }
 
   getCourse(id: number) {
@@ -22,6 +23,10 @@ export class CoursesService {
 
   addCourse(course: any) {
     return this.http.post(`${this.apiUrl}/courses`, course);
+  }
+
+  updateCourse(id: string, course: any) {
+    return this.http.patch(`${this.apiUrl}/courses/${id}`, course);
   }
 
   deleteCourse(id: string) {
