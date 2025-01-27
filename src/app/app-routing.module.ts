@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CoursesComponent } from './features/courses/courses.component';
 import { CourseDetailedComponent } from './features/course-detailed/course-detailed.component';
 import { HomeComponent } from './features/home/home.component';
+import { AuthGuard } from './core/guards/auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,8 @@ const routes: Routes = [
       import('./features/admin-dashboard/admin-dashboard.module').then(
         (m) => m.AdminDashboardModule
       ),
+    canActivate: [AuthGuard],
+    data: { role: 'Admin' },
   },
   { path: '**', redirectTo: '' },
 ];

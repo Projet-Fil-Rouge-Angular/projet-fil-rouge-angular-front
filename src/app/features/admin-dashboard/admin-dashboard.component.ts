@@ -17,7 +17,11 @@ export class AdminDashboardComponent implements OnInit {
   showModal = false;
   modalTitle = '';
 
-  constructor(private coursesService: CoursesService, private router: Router, private authService: AuthService) {}
+  constructor(
+    private coursesService: CoursesService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.loadCourses();
@@ -79,7 +83,7 @@ export class AdminDashboardComponent implements OnInit {
     this.showModal = false;
     this.selectedCourse = null;
   }
-  
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);

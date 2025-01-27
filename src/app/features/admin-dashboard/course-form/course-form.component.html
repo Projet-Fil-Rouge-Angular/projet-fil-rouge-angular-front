@@ -1,6 +1,6 @@
 <form (ngSubmit)="onSubmit()" class="course-form">
   <label for="name">Nom du cours :</label>
-  <input type="text" id="name" [(ngModel)]="formData.name" name="name" required/>
+  <input type="text" id="name" [(ngModel)]="formData.name" name="name" required />
   <div *ngIf="!formData.name" class="error-message">
     Le nom du cours est requis.
   </div>
@@ -13,24 +13,25 @@
 
   <label for="duration">Durée :</label>
   <div class="duration-group">
-    <input type="number" id="duration" [(ngModel)]="formData.duration" name="duration" required min="1"/>
-    <select [(ngModel)]="formData.durationUnit" name="durationUnit" class="duration-select" required >
-      <option value="heures">heures</option>
-      <option value="jours">jours</option>
+    <input type="number" id="duration" [(ngModel)]="formData.duration" name="duration" required min="1" />
+    <select [(ngModel)]="formData.durationUnit" name="durationUnit" class="duration-select" required>
+      <option value="Heure">heures</option>
+      <option value="Jour">jours</option>
     </select>
   </div>
-  <div *ngIf="!formData.duration || formData.duration < 1" class="error-message" >
+  <div *ngIf="!formData.duration || formData.duration < 1" class="error-message">
     La durée doit être supérieure ou égale à 1.
   </div>
 
   <label for="contentMarkdown">Contenu (Markdown) :</label>
-  <textarea id="contentMarkdown" [(ngModel)]="formData.contentMarkdown" name="contentMarkdown" rows="5" required></textarea>
+  <textarea id="contentMarkdown" [(ngModel)]="formData.contentMarkdown" name="contentMarkdown" rows="5"
+    required></textarea>
   <div *ngIf="!formData.contentMarkdown" class="error-message">
     Le contenu est requis.
   </div>
 
   <label for="imageUrl">URL de l'image :</label>
-  <input type="url" id="imageUrl" [(ngModel)]="formData.imageUrl" name="imageUrl" required/>
+  <input type="url" id="imageUrl" [(ngModel)]="formData.imageUrl" name="imageUrl" required />
   <div *ngIf="!formData.imageUrl" class="error-message">
     Une URL d'image valide est requise.
   </div>
@@ -46,7 +47,8 @@
 
   <label for="prerequisites">Prérequis :</label>
   <div class="input-group">
-    <input type="text" id="prerequisites" [(ngModel)]="prerequisiteInput" name="prerequisiteInput" placeholder="Ajouter un prérequis"/>
+    <input type="text" id="prerequisites" [(ngModel)]="prerequisiteInput" name="prerequisiteInput"
+      placeholder="Ajouter un prérequis" />
     <button type="button" (click)="addPrerequisite()" style="margin-top: 5px">
       Ajouter
     </button>
@@ -63,7 +65,7 @@
 
   <label for="tags">Tags :</label>
   <div class="input-group">
-    <input type="text" id="tags" [(ngModel)]="tagInput" name="tagInput" placeholder="Ajouter un tag"/>
+    <input type="text" id="tags" [(ngModel)]="tagInput" name="tagInput" placeholder="Ajouter un tag" />
     <button type="button" (click)="addTag()" style="margin-top: 5px">
       Ajouter
     </button>

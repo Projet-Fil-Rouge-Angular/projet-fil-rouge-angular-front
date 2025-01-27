@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Course } from '../../../core/models/courses/course.model';
+import { DurationUnit } from '../../../core/models/courses/duration_unit.enum';
 
 @Component({
   selector: 'app-course-form',
@@ -17,7 +18,7 @@ export class CourseFormComponent {
     name: '',
     description: '',
     duration: 0,
-    durationUnit: 'heures',
+    durationUnit: DurationUnit.Heure,
     contentMarkdown: '',
     imageUrl: '',
     level: '',
@@ -67,13 +68,13 @@ export class CourseFormComponent {
       this.formData.tags.length > 0
     );
   }
-  
+
   onSubmit(): void {
     if (!this.isFormValid()) {
       alert('Veuillez remplir tous les champs correctement.');
       return;
     }
+    console.log(this.formData);
     this.save.emit(this.formData);
   }
-
 }
