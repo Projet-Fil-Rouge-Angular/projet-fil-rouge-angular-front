@@ -10,8 +10,28 @@ nav a {
   color: white;
   margin: 0 15px;
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 nav a:hover {
   text-decoration: underline;
+}
+
+button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+button:hover {
+  text-decoration: underline;
+}
+
+.cart-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
 }

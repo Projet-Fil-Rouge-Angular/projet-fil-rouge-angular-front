@@ -2,6 +2,17 @@
     <nav>
         <a routerLink="/">Home</a>
         <a routerLink="/courses">Courses</a>
-        <a routerLink="/admin-dashboard">Admin Dashboard</a>
+        <ng-container *ngIf="isLoggedIn; else guestOptions">
+            <ng-container *ngIf="userRole === 'Admin'; else userOptions">
+                <a routerLink="/admin-dashboard">Admin Dashboard</a>
+            </ng-container>
+            <ng-template #userOptions>
+                <button>Panier</button>
+            </ng-template>
+            <button (click)="logout()">Se déconnecter</button>
+        </ng-container>
+        <ng-template #guestOptions>
+            <a routerLink="/login">Se connecter</a>
+        </ng-template>
     </nav>
 </header>

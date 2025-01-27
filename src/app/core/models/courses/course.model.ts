@@ -1,9 +1,11 @@
+import { DurationUnit } from "./duration_unit.enum";
+
 export interface Course {
     id: number;
     name: string;
     description: string;
     duration: number;
-    durationUnit: string;
+    durationUnit: DurationUnit;
     contentMarkdown: string;
     imageUrl: string;
     level: string;

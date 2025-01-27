@@ -30,9 +30,14 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     this.authService.login(this.username, this.password).subscribe({
-      next: (response) => {
-        localStorage.setItem('authToken', response.access_token);
-        this.router.navigate(['/admin-dashboard']);
+      next: (_) => {
+        const userRole = this.authService.getUserRole();
+
+        if (userRole === 'Admin') {
+          this.router.navigate(['/admin-dashboard']);
+        } else if (userRole === 'User') {
+          this.router.navigate(['/']);
+        }
       },
       error: () => {
         this.errorMessage = 'Invalid username or password';
