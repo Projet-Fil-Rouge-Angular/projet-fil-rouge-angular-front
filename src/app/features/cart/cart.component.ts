@@ -16,6 +16,8 @@ export class CartComponent implements OnInit {
   coursesMap: { [key: number]: Course } = {}; 
   showModal = false;
   purchaseSummary: Course[] = [];
+  notificationMessage: string = '';
+  showNotification: boolean = false;
 
   constructor(
     private cartService: CartService,
@@ -62,7 +64,12 @@ export class CartComponent implements OnInit {
     this.cartService.clearCart().subscribe(() => {
       this.showModal = false;
       this.cart = { courses: [] };
-      alert("Achat confirmé !");
+      this.notificationMessage = 'Achat confirmé !';
+      this.showNotification = true;
+  
+      setTimeout(() => {
+        this.showNotification = false;
+      }, 3000);
     });
   }
 

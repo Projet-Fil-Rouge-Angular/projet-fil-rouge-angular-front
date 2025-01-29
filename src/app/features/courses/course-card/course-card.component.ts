@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Course } from '../../../core/models/courses/course.model';
 import { CartService } from '../../../core/services/cart/cart.service';
 import { AuthService } from '../../../core/services/auth/auth.service';
@@ -11,6 +11,7 @@ import { AuthService } from '../../../core/services/auth/auth.service';
 })
 export class CourseCardComponent implements OnInit {
   @Input() course!: Course;
+  @Output() courseAddedToCart = new EventEmitter<string>();
   isUserLoggedIn = false;
 
   constructor(
@@ -19,7 +20,6 @@ export class CourseCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Souscription à l'état de connexion de l'utilisateur
     this.authService.authStatus$.subscribe((isLoggedIn) => {
       this.isUserLoggedIn = isLoggedIn;
     });
@@ -29,10 +29,19 @@ export class CourseCardComponent implements OnInit {
     const schedule = new Date().toISOString();
     this.cartService.addCourseToCart(this.course.id, schedule).subscribe(
       () => {
-        alert('Cours ajouté au panier !');
+        this.courseAddedToCart.emit('Cours ajouté au panier !');
       },
       (error) => {
-        alert('Erreur : ' + error.error.message);
+        if (error.status === 400) {
+            this.courseAddedToCart.emit('Ce cours est déjà dans votre panier');
+            const notificationElement = document.querySelector('.notification');
+            if (notificationElement) {
+            notificationElement.classList.add('error');
+            }
+        }
+        else {
+          this.courseAddedToCart.emit('Erreur lors de l\'ajout au panier');
+        }
       }
     );
   }

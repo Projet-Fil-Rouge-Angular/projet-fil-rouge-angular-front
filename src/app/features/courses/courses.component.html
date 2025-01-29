@@ -15,10 +15,11 @@
   </p>
   
   <div class="courses-list">
-    <app-course-card
-      *ngFor="let course of filteredCourses"
-      [course]="course"
-    ></app-course-card>
+    <app-course-card 
+    *ngFor="let course of filteredCourses" 
+    [course]="course"
+    (courseAddedToCart)="showNotificationMessage($event)">
+  </app-course-card>
   </div>
 
   <p>

@@ -40,9 +40,13 @@ export class CoursesComponent implements OnInit {
     );
   }
 
-  addToCart(course: Course) {
-    this.notificationMessage = `Le cours ${course.name} a été ajouté au panier !`;
+  showNotificationMessage(message: string) {
+    this.notificationMessage = message;
     this.showNotification = true;
-    setTimeout(() => this.showNotification = false, 3000);
+  
+    setTimeout(() => {
+      this.showNotification = false;
+    }, 3000);
   }
+  
 }

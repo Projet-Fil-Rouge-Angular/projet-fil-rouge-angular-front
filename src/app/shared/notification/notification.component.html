@@ -1,4 +1,5 @@
-<div *ngIf="isVisible" class="notification">
-    {{ message }}
+<div class="notification" *ngIf="estVisible">
+    <span>{{ message }}</span>
+    <button (click)="cacherNotification()">X</button>
   </div>
   

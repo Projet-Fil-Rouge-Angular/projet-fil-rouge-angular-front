@@ -9,23 +9,18 @@ import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { AppComponent } from './app.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { CourseDetailedComponent } from './features/course-detailed/course-detailed.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './features/home/home.component';
 import { CoursesModule } from './features/courses/courses.module';
 import { CommonModule } from '@angular/common';
 import { CartComponent } from './features/cart/cart.component';
-import { NotificationComponent } from './shared/notification/notification.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CourseDetailedComponent,
-    HeaderComponent,
-    FooterComponent,
     HomeComponent,
     CartComponent,
-    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +29,8 @@ import { NotificationComponent } from './shared/notification/notification.compon
     HttpClientModule,
     AppRoutingModule,
     CoursesModule,
-    MarkdownModule.forRoot({ loader: HttpClient })
+    MarkdownModule.forRoot({ loader: HttpClient }),
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
