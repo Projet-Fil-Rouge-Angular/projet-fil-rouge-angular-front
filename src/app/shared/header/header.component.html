@@ -6,8 +6,8 @@
         </div>
 
         <div class="nav-right">
-            <ng-container *ngIf="isLoggedIn; else guestOptions">
-                <ng-container *ngIf="userRole === 'Admin'; else userOptions">
+            <ng-container *ngIf="estConnecte; else guestOptions">
+                <ng-container *ngIf="roleUtilisateur === 'Admin'; else userOptions">
                     <a routerLink="/admin-dashboard">Admin</a>
                 </ng-container>
                 <ng-template #userOptions>
@@ -16,7 +16,7 @@
                         Panier
                     </a>
                 </ng-template>
-                <button class="logout-btn" (click)="logout()">Déconnexion</button>
+                <button class="logout-btn" (click)="seDeconnecter()">Déconnexion</button>
             </ng-container>
             <ng-template #guestOptions>
                 <a routerLink="/login" class="login-btn">Connexion</a>
