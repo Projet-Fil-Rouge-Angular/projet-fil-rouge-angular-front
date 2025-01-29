@@ -10,6 +10,10 @@ import { Course } from '../../core/models/courses/course.model';
 })
 export class CoursesComponent implements OnInit {
   courses: Course[] = [];
+  filteredCourses: Course[] = [];
+  searchQuery: string = '';
+  notificationMessage = '';
+  showNotification = false;
 
   constructor(private coursesService: CoursesService) {}
 
@@ -21,7 +25,24 @@ export class CoursesComponent implements OnInit {
     this.coursesService.getCourses().subscribe((response: any) => {
       if (response.statusCode === 200) {
         this.courses = response.data;
+        this.filteredCourses = response.data;
       }
     });
+  }
+
+  filterCourses() {
+    const query = this.searchQuery.toLowerCase().trim();
+
+    this.filteredCourses = this.courses.filter(course => 
+      Object.values(course).some(value =>
+        value.toString().toLowerCase().includes(query)
+      )
+    );
+  }
+
+  addToCart(course: Course) {
+    this.notificationMessage = `Le cours ${course.name} a été ajouté au panier !`;
+    this.showNotification = true;
+    setTimeout(() => this.showNotification = false, 3000);
   }
 }

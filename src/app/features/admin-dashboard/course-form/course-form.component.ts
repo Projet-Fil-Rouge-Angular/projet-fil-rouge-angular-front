@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Course } from '../../../core/models/courses/course.model';
-import { DurationUnit } from '../../../core/models/courses/duration_unit.enum';
 
 @Component({
   selector: 'app-course-form',
@@ -18,12 +17,12 @@ export class CourseFormComponent {
     name: '',
     description: '',
     duration: 0,
-    durationUnit: DurationUnit.Heure,
     contentMarkdown: '',
     imageUrl: '',
     level: '',
     prerequisites: [],
     tags: [],
+    price: 0,
   };
 
   tagInput = '';
@@ -65,7 +64,8 @@ export class CourseFormComponent {
       !!this.formData.imageUrl &&
       !!this.formData.level &&
       this.formData.prerequisites.length > 0 &&
-      this.formData.tags.length > 0
+      this.formData.tags.length > 0 &&
+      this.formData.price >= 1
     );
   }
 

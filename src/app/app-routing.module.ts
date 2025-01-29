@@ -4,6 +4,7 @@ import { CoursesComponent } from './features/courses/courses.component';
 import { CourseDetailedComponent } from './features/course-detailed/course-detailed.component';
 import { HomeComponent } from './features/home/home.component';
 import { AuthGuard } from './core/guards/auth/auth.guard';
+import { CartComponent } from './features/cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { role: 'Admin' },
   },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' },
 ];
 

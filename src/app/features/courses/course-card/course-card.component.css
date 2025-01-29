@@ -40,7 +40,7 @@
   margin-top: 16px;
 }
 
-.course-card-actions button {
+.course-details {
   padding: 8px 16px;
   background-color: #007bff;
   color: white;
@@ -50,6 +50,21 @@
   transition: background-color 0.3s ease;
 }
 
-.course-card-actions button:hover {
+.course-details:hover {
   background-color: #0056b3;
+}
+
+.course-add{
+  padding: 8px 16px;
+  background-color: #12d600;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 8px;
+}
+
+.course-add:hover{
+  background-color: #17a50a;
 }

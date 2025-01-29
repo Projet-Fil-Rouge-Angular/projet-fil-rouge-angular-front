@@ -13,6 +13,9 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './features/home/home.component';
 import { CoursesModule } from './features/courses/courses.module';
+import { CommonModule } from '@angular/common';
+import { CartComponent } from './features/cart/cart.component';
+import { NotificationComponent } from './shared/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +24,13 @@ import { CoursesModule } from './features/courses/courses.module';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    CartComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    CommonModule,
     HttpClientModule,
     AppRoutingModule,
     CoursesModule,

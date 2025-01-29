@@ -1,0 +1,44 @@
+<div class="cart-container">
+  <h1>Votre Panier</h1>
+
+  <div *ngIf="cart && cart.courses.length > 0; else emptyCart">
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of cart.courses">
+        <div class="cart-item-details">
+          <p><strong>Cours :</strong> {{ coursesMap[item.courseId].name }}</p>
+          <p><strong>Description :</strong> {{ coursesMap[item.courseId].description }}</p>
+          <p><strong>Durée :</strong> {{ coursesMap[item.courseId].duration }} heures</p>
+          <p><strong>Horaire :</strong> {{ formatSchedule(item.schedule) }}</p>
+
+        </div>
+        <button class="remove-btn" (click)="removeFromCart(item.courseId)">❌ Retirer</button>
+      </div>
+    </div>
+
+    <div class="cart-actions">
+      <button class="checkout-btn" (click)="preparePurchaseSummary()">💳 Acheter</button>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <p class="empty-cart-message">Votre panier est vide. Ajoutez des cours pour commencer !</p>
+  </ng-template>
+
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <h2>Récapitulatif d'Achat</h2>
+      <div class="purchase-summary">
+        <div *ngFor="let course of purchaseSummary" class="summary-item">
+          <p><strong>{{ course.name }}</strong></p>
+          <p>{{ course.description }}</p>
+          <p><strong>Durée :</strong> {{ course.duration }} heures</p>
+        </div>
+      </div>
+      <div class="total-price">
+        <p><strong>Prix Total :</strong> {{ calculateTotalPrice() }} €</p>
+      </div>
+      <button class="confirm-btn" (click)="confirmPurchase()">Confirmer l'Achat</button>
+      <button class="cancel-btn" (click)="closeModal()">Annuler</button>
+    </div>
+  </div>
+</div>

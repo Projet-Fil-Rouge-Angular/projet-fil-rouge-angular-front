@@ -84,8 +84,4 @@ export class AdminDashboardComponent implements OnInit {
     this.selectedCourse = null;
   }
 
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
 }
