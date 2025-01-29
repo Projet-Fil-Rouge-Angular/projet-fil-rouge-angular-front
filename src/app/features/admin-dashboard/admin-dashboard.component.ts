@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../core/services/courses/courses.service';
 import { Course } from '../../core/models/courses/course.model';
-import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/auth/auth.service';
 
+/**
+ * Composant représentant le tableau de bord administrateur,
+ * permettant la gestion des cours (ajout, suppression, modification).
+ */
 @Component({
   selector: 'app-admin-dashboard',
   standalone: false,
@@ -11,77 +13,99 @@ import { AuthService } from '../../core/services/auth/auth.service';
   styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent implements OnInit {
-  courses: Course[] = [];
-  errorMessage = '';
-  selectedCourse: Course | null = null;
-  showModal = false;
-  modalTitle = '';
+  cours: Course[] = [];
+  messageErreur = '';
+  coursSelectionne: Course | null = null;
+  afficherModale = false;
+  titreModale = '';
 
   constructor(
-    private coursesService: CoursesService,
-    private router: Router,
-    private authService: AuthService
+    private serviceCours: CoursesService,
   ) {}
 
+  /**
+   * Initialise le composant en chargeant les cours disponibles.
+   */
   ngOnInit() {
-    this.loadCourses();
+    this.chargerCours();
   }
 
-  loadCourses() {
-    this.coursesService.getCourses().subscribe((response: any) => {
-      if (response.statusCode === 200) {
-        this.courses = response.data;
+  /**
+   * Charge la liste des cours depuis le service.
+   */
+  chargerCours() {
+    this.serviceCours.getCourses().subscribe((reponse: any) => {
+      if (reponse.statusCode === 200) {
+        this.cours = reponse.data;
       }
     });
   }
 
-  deleteCourse(id: number): void {
-    this.coursesService.deleteCourse(id.toString()).subscribe({
+  /**
+   * Supprime un cours en fonction de son identifiant.
+   * @param idCours Identifiant du cours à supprimer.
+   */
+  supprimerCours(idCours: number): void {
+    this.serviceCours.deleteCourse(idCours.toString()).subscribe({
       next: () => {
-        this.loadCourses();
+        this.chargerCours();
       },
       error: () => {
-        this.errorMessage = 'Failed to delete course.';
+        this.messageErreur = 'Échec de la suppression du cours.';
       },
     });
   }
 
-  addCourse(): void {
-    this.selectedCourse = null;
-    this.modalTitle = 'Ajouter un cours';
-    this.showModal = true;
+  /**
+   * Affiche la fenêtre modale pour ajouter un nouveau cours.
+   */
+  ajouterCours(): void {
+    this.coursSelectionne = null;
+    this.titreModale = 'Ajouter un cours';
+    this.afficherModale = true;
   }
 
-  editCourse(course: Course): void {
-    this.selectedCourse = course;
-    this.modalTitle = 'Modifier un cours';
-    this.showModal = true;
+  /**
+   * Affiche la fenêtre modale pour modifier un cours existant.
+   * @param cours Cours à modifier.
+   */
+  modifierCours(cours: Course): void {
+    this.coursSelectionne = cours;
+    this.titreModale = 'Modifier un cours';
+    this.afficherModale = true;
   }
 
-  saveCourse(course: Course): void {
-    if (this.selectedCourse) {
-      this.coursesService.updateCourse(course.id.toString(), course).subscribe({
+  /**
+   * Enregistre un cours (ajout ou modification).
+   * @param cours Données du cours à enregistrer.
+   */
+  enregistrerCours(cours: Course): void {
+    if (!cours) return; // Vérification pour éviter les erreurs
+
+    if (this.coursSelectionne) {
+      this.serviceCours.updateCourse(cours.id.toString(), cours).subscribe({
         next: () => {
-          this.loadCourses();
-          this.closeModal();
+          this.chargerCours();
+          this.fermerModale();
         },
-        error: () => console.error('Failed to update course'),
+        error: () => console.error('Échec de la mise à jour du cours'),
       });
     } else {
-      console.log(course);
-      this.coursesService.addCourse(course).subscribe({
+      this.serviceCours.addCourse(cours).subscribe({
         next: () => {
-          this.loadCourses();
-          this.closeModal();
+          this.chargerCours();
+          this.fermerModale();
         },
-        error: () => console.error('Failed to add course'),
+        error: () => console.error("Échec de l'ajout du cours"),
       });
     }
   }
 
-  closeModal(): void {
-    this.showModal = false;
-    this.selectedCourse = null;
+  /**
+   * Ferme la fenêtre modale et réinitialise le cours sélectionné.
+   */
+  fermerModale(): void {
+    this.afficherModale = false;
+    this.coursSelectionne = null;
   }
-
 }

@@ -12,8 +12,7 @@ const routes: Routes = [
   { path: 'courses/:id', component: CourseDetailedComponent },
   {
     path: 'login',
-    loadChildren: () =>
-      import('./features/login/login.module').then((m) => m.LoginModule),
+    loadChildren: () => import('./features/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'admin-dashboard',

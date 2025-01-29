@@ -3,44 +3,53 @@ import { Course } from '../../../core/models/courses/course.model';
 import { CartService } from '../../../core/services/cart/cart.service';
 import { AuthService } from '../../../core/services/auth/auth.service';
 
+/**
+ * Carte représentant un cours avec la possibilité de l'ajouter au panier.
+ */
 @Component({
   selector: 'app-course-card',
   templateUrl: './course-card.component.html',
   standalone: false,
-  styleUrls: ['./course-card.component.css']
+  styleUrls: ['./course-card.component.css'],
 })
 export class CourseCardComponent implements OnInit {
   @Input() course!: Course;
-  @Output() courseAddedToCart = new EventEmitter<string>();
-  isUserLoggedIn = false;
+  @Output() coursAjouteAuPanier = new EventEmitter<string>();
+  utilisateurConnecte = false;
 
   constructor(
-    private cartService: CartService,
-    private authService: AuthService
+    private servicePanier: CartService,
+    private serviceAuth: AuthService
   ) {}
 
+  /**
+   * Vérifie si l'utilisateur est connecté à l'initialisation du composant.
+   */
   ngOnInit(): void {
-    this.authService.authStatus$.subscribe((isLoggedIn) => {
-      this.isUserLoggedIn = isLoggedIn;
+    this.serviceAuth.authStatus$.subscribe((estConnecte) => {
+      this.utilisateurConnecte = estConnecte;
     });
   }
 
-  addToCart(): void {
-    const schedule = new Date().toISOString();
-    this.cartService.addCourseToCart(this.course.id, schedule).subscribe(
+  /**
+   * Ajoute le cours au panier et gère les erreurs éventuelles.
+   */
+  ajouterAuPanier(): void {
+    const horaire = new Date().toISOString();
+
+    this.servicePanier.addCourseToCart(this.course.id, horaire).subscribe(
       () => {
-        this.courseAddedToCart.emit('Cours ajouté au panier !');
+        this.coursAjouteAuPanier.emit('Cours ajouté au panier !');
       },
-      (error) => {
-        if (error.status === 400) {
-            this.courseAddedToCart.emit('Ce cours est déjà dans votre panier');
-            const notificationElement = document.querySelector('.notification');
-            if (notificationElement) {
-            notificationElement.classList.add('error');
-            }
-        }
-        else {
-          this.courseAddedToCart.emit('Erreur lors de l\'ajout au panier');
+      (erreur) => {
+        if (erreur.status === 400) {
+          this.coursAjouteAuPanier.emit('Ce cours est déjà dans votre panier');
+          const elementNotification = document.querySelector('.notification');
+          if (elementNotification) {
+            elementNotification.classList.add('error');
+          }
+        } else {
+          this.coursAjouteAuPanier.emit("Erreur lors de l'ajout au panier");
         }
       }
     );

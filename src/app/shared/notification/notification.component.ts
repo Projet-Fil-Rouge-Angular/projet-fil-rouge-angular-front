@@ -7,10 +7,9 @@ import { Component, Input } from '@angular/core';
   selector: 'app-notification',
   standalone: false,
   templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.css']
+  styleUrls: ['./notification.component.css'],
 })
 export class NotificationComponent {
-
   @Input() message: string = '';
   @Input() estVisible: boolean = false;
 

@@ -9,6 +9,8 @@
   </div>
   <div class="course-card-actions">
     <button class="course-details" [routerLink]="['/courses', course.id]">Voir les détails</button>
-    <button *ngIf="isUserLoggedIn" class="course-add" (click)="addToCart()">Ajouter au panier</button>
+    <button *ngIf="utilisateurConnecte" class="course-add" (click)="ajouterAuPanier()">
+      Ajouter au panier
+    </button>
   </div>
 </div>

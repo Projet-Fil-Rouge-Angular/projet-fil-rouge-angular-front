@@ -54,7 +54,7 @@
   background-color: #0056b3;
 }
 
-.course-add{
+.course-add {
   padding: 8px 16px;
   background-color: #12d600;
   color: white;
@@ -65,6 +65,6 @@
   margin-left: 8px;
 }
 
-.course-add:hover{
+.course-add:hover {
   background-color: #17a50a;
 }

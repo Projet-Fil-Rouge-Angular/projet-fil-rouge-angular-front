@@ -1,22 +1,21 @@
 <div class="cart-container">
   <h1>Votre Panier</h1>
 
-  <div *ngIf="cart && cart.courses.length > 0; else emptyCart">
+  <div *ngIf="panier && panier.courses.length > 0; else emptyCart">
     <div class="cart-items">
-      <div class="cart-item" *ngFor="let item of cart.courses">
+      <div class="cart-item" *ngFor="let item of panier.courses">
         <div class="cart-item-details">
-          <p><strong>Cours :</strong> {{ coursesMap[item.courseId].name }}</p>
-          <p><strong>Description :</strong> {{ coursesMap[item.courseId].description }}</p>
-          <p><strong>Durée :</strong> {{ coursesMap[item.courseId].duration }} heures</p>
-          <p><strong>Horaire :</strong> {{ formatSchedule(item.schedule) }}</p>
-
+          <p><strong>Cours :</strong> {{ coursMap[item.courseId].name }}</p>
+          <p><strong>Description :</strong> {{ coursMap[item.courseId].description }}</p>
+          <p><strong>Durée :</strong> {{ coursMap[item.courseId].duration }} heures</p>
+          <p><strong>Horaire :</strong> {{ formaterHoraire(item.schedule) }}</p>
         </div>
-        <button class="remove-btn" (click)="removeFromCart(item.courseId)">❌ Retirer</button>
+        <button class="remove-btn" (click)="retirerDuPanier(item.courseId)">❌ Retirer</button>
       </div>
     </div>
 
     <div class="cart-actions">
-      <button class="checkout-btn" (click)="preparePurchaseSummary()">💳 Acheter</button>
+      <button class="checkout-btn" (click)="preparerResumeAchat()">💳 Acheter</button>
     </div>
   </div>
 
@@ -24,23 +23,28 @@
     <p class="empty-cart-message">Votre panier est vide. Ajoutez des cours pour commencer !</p>
   </ng-template>
 
-  <div class="modal" *ngIf="showModal">
+  <div class="modal" *ngIf="afficherModale">
     <div class="modal-content">
       <h2>Récapitulatif d'Achat</h2>
       <div class="purchase-summary">
-        <div *ngFor="let course of purchaseSummary" class="summary-item">
-          <p><strong>{{ course.name }}</strong></p>
+        <div *ngFor="let course of resumeAchat" class="summary-item">
+          <p>
+            <strong>{{ course.name }}</strong>
+          </p>
           <p>{{ course.description }}</p>
           <p><strong>Durée :</strong> {{ course.duration }} heures</p>
         </div>
       </div>
       <div class="total-price">
-        <p><strong>Prix Total :</strong> {{ calculateTotalPrice() }} €</p>
+        <p><strong>Prix Total :</strong> {{ calculerPrixTotal() }} €</p>
       </div>
-      <button class="confirm-btn" (click)="confirmPurchase()">Confirmer l'Achat</button>
-      <button class="cancel-btn" (click)="closeModal()">Annuler</button>
+      <button class="confirm-btn" (click)="confirmerAchat()">Confirmer l'Achat</button>
+      <button class="cancel-btn" (click)="fermerModale()">Annuler</button>
     </div>
   </div>
 </div>
 
-<app-notification [message]="notificationMessage" [estVisible]="showNotification"></app-notification>
+<app-notification
+  [message]="messageNotification"
+  [estVisible]="afficherNotification"
+></app-notification>

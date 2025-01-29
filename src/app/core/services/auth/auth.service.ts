@@ -16,6 +16,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Effectue une requête de connexion et stocke le jeton d'authentification.
+   * @param username Nom d'utilisateur de l'utilisateur.
+   * @param password Mot de passe de l'utilisateur.
+   * @returns Un `Observable` contenant la réponse de l'API.
+   */
   login(username: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { username, password }).pipe(
       map((response: any) => {
@@ -29,6 +35,10 @@ export class AuthService {
     );
   }
 
+  /**
+   * Vérifie si le jeton d'authentification est valide en appelant l'API.
+   * @returns Un `Observable` retournant `true` si le jeton est valide, sinon `false`.
+   */
   validateToken(): Observable<boolean> {
     const token = localStorage.getItem(this.tokenKey);
     if (!token) {
@@ -40,15 +50,27 @@ export class AuthService {
     );
   }
 
+  /**
+   * Déconnecte l'utilisateur en supprimant le jeton du stockage local
+   * et en mettant à jour le statut d'authentification.
+   */
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     this.authStatusSubject.next(false);
   }
 
+  /**
+   * Récupère le jeton d'authentification stocké.
+   * @returns Le jeton sous forme de `string` ou `null` s'il n'existe pas.
+   */
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
 
+  /**
+   * Récupère le rôle de l'utilisateur à partir du jeton déchiffré.
+   * @returns Le rôle de l'utilisateur (`string`) ou `null` s'il n'est pas défini.
+   */
   getUserRole(): string | null {
     const token = this.getToken();
     if (!token) {
@@ -58,6 +80,10 @@ export class AuthService {
     return decodedToken.type || null;
   }
 
+  /**
+   * Vérifie si l'utilisateur est connecté en regardant si un jeton est présent.
+   * @returns `true` si un jeton est stocké, sinon `false`.
+   */
   isLoggedIn(): boolean {
     return !!this.getToken();
   }

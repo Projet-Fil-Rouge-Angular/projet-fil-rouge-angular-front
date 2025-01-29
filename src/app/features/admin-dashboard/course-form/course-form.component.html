@@ -1,90 +1,123 @@
 <form (ngSubmit)="onSubmit()" class="course-form">
   <label for="name">Nom du cours :</label>
-  <input type="text" id="name" [(ngModel)]="formData.name" name="name" required />
-  <div *ngIf="!formData.name" class="error-message">
-    Le nom du cours est requis.
-  </div>
+  <input type="text" id="name" [(ngModel)]="donneesFormulaire.name" name="name" required />
+  <div *ngIf="!donneesFormulaire.name" class="error-message">Le nom du cours est requis.</div>
 
   <label for="description">Description :</label>
-  <textarea id="description" [(ngModel)]="formData.description" name="description" rows="3" required></textarea>
-  <div *ngIf="!formData.description" class="error-message">
+  <textarea
+    id="description"
+    [(ngModel)]="donneesFormulaire.description"
+    name="description"
+    rows="3"
+    required
+  ></textarea>
+  <div *ngIf="!donneesFormulaire.description" class="error-message">
     La description est requise.
   </div>
 
   <label for="duration">Durée :</label>
   <div class="duration-group">
-    <input type="number" id="duration" [(ngModel)]="formData.duration" name="duration" required min="1" />
+    <input
+      type="number"
+      id="duration"
+      [(ngModel)]="donneesFormulaire.duration"
+      name="duration"
+      required
+      min="1"
+    />
   </div>
-  <div *ngIf="!formData.duration || formData.duration < 1" class="error-message">
+  <div *ngIf="!donneesFormulaire.duration || donneesFormulaire.duration < 1" class="error-message">
     La durée doit être supérieure ou égale à 1.
   </div>
 
   <label for="contentMarkdown">Contenu (Markdown) :</label>
-  <textarea id="contentMarkdown" [(ngModel)]="formData.contentMarkdown" name="contentMarkdown" rows="5"
-    required></textarea>
-  <div *ngIf="!formData.contentMarkdown" class="error-message">
-    Le contenu est requis.
-  </div>
+  <textarea
+    id="contentMarkdown"
+    [(ngModel)]="donneesFormulaire.contentMarkdown"
+    name="contentMarkdown"
+    rows="5"
+    required
+  ></textarea>
+  <div *ngIf="!donneesFormulaire.contentMarkdown" class="error-message">Le contenu est requis.</div>
 
   <label for="imageUrl">URL de l'image :</label>
-  <input type="url" id="imageUrl" [(ngModel)]="formData.imageUrl" name="imageUrl" required />
-  <div *ngIf="!formData.imageUrl" class="error-message">
+  <input
+    type="url"
+    id="imageUrl"
+    [(ngModel)]="donneesFormulaire.imageUrl"
+    name="imageUrl"
+    required
+  />
+  <div *ngIf="!donneesFormulaire.imageUrl" class="error-message">
     Une URL d'image valide est requise.
   </div>
 
   <label for="level">Niveau :</label>
-  <select [(ngModel)]="formData.level" name="level" id="level" required>
+  <select [(ngModel)]="donneesFormulaire.level" name="level" id="level" required>
     <option value="" disabled selected>Choisissez un niveau</option>
     <option value="Débutant">Débutant</option>
     <option value="Intermédiaire">Intermédiaire</option>
     <option value="Avancé">Avancé</option>
   </select>
-  <div *ngIf="!formData.level" class="error-message">Le niveau est requis.</div>
+  <div *ngIf="!donneesFormulaire.level" class="error-message">Le niveau est requis.</div>
 
   <label for="prerequisites">Prérequis :</label>
   <div class="input-group">
-    <input type="text" id="prerequisites" [(ngModel)]="prerequisiteInput" name="prerequisiteInput"
-      placeholder="Ajouter un prérequis" />
-    <button type="button" (click)="addPrerequisite()" style="margin-top: 5px">
-      Ajouter
-    </button>
+    <input
+      type="text"
+      id="prerequisites"
+      [(ngModel)]="saisiePrerequis"
+      name="prerequisiteInput"
+      placeholder="Ajouter un prérequis"
+    />
+    <button type="button" (click)="ajouterPrerequis()" style="margin-top: 5px">Ajouter</button>
   </div>
   <ul class="chip-list">
-    <li *ngFor="let prerequisite of formData.prerequisites; let i = index">
+    <li *ngFor="let prerequisite of donneesFormulaire.prerequisites; let i = index">
       {{ prerequisite }}
-      <button type="button" (click)="removePrerequisite(i)">×</button>
+      <button type="button" (click)="supprimerPrerequis(i)">×</button>
     </li>
   </ul>
-  <div *ngIf="formData.prerequisites.length === 0" class="error-message">
+  <div *ngIf="donneesFormulaire.prerequisites.length === 0" class="error-message">
     Au moins un prérequis est requis.
   </div>
 
   <label for="tags">Tags :</label>
   <div class="input-group">
-    <input type="text" id="tags" [(ngModel)]="tagInput" name="tagInput" placeholder="Ajouter un tag" />
-    <button type="button" (click)="addTag()" style="margin-top: 5px">
-      Ajouter
-    </button>
+    <input
+      type="text"
+      id="tags"
+      [(ngModel)]="saisieTag"
+      name="tagInput"
+      placeholder="Ajouter un tag"
+    />
+    <button type="button" (click)="ajouterTag()" style="margin-top: 5px">Ajouter</button>
   </div>
   <ul class="chip-list">
-    <li *ngFor="let tag of formData.tags; let i = index">
+    <li *ngFor="let tag of donneesFormulaire.tags; let i = index">
       {{ tag }}
-      <button type="button" (click)="removeTag(i)">×</button>
+      <button type="button" (click)="supprimerTag(i)">×</button>
     </li>
   </ul>
-  <div *ngIf="formData.tags.length === 0" class="error-message">
+  <div *ngIf="donneesFormulaire.tags.length === 0" class="error-message">
     Au moins un tag est requis.
   </div>
+
   <label for="price">Prix :</label>
-  <input type="number" id="price" [(ngModel)]="formData.price" name="price" required min="0" step="0.01" />
-  <div *ngIf="!formData.price && formData.price !== 0" class="error-message">
-    Le prix est requis.
+  <input
+    type="number"
+    id="price"
+    [(ngModel)]="donneesFormulaire.price"
+    name="price"
+    required
+    min="1"
+  />
+  <div *ngIf="!donneesFormulaire.price || donneesFormulaire.price < 1" class="error-message">
+    Le prix doit être supérieur ou égal à 1.
   </div>
-  <div *ngIf="formData.price < 0" class="error-message">
-    Le prix doit être supérieur ou égal à 0.
-  </div>
+
   <div class="form-actions">
-    <button type="submit" [disabled]="!isFormValid()">Enregistrer</button>
-    <button type="button" (click)="cancel.emit()">Annuler</button>
+    <button type="submit" [disabled]="!formulaireEstValide()">Enregistrer</button>
+    <button type="button" (click)="annuler.emit()">Annuler</button>
   </div>
 </form>

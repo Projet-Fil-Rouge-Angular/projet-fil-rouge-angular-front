@@ -4,87 +4,123 @@ import { CoursesService } from '../../core/services/courses/courses.service';
 import { Course } from '../../core/models/courses/course.model';
 import { DatePipe } from '@angular/common';
 
+/**
+ * Composant permettant la gestion du panier et l'achat des cours.
+ */
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   standalone: false,
   styleUrls: ['./cart.component.css'],
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
 export class CartComponent implements OnInit {
-  cart: any = null;
-  coursesMap: { [key: number]: Course } = {}; 
-  showModal = false;
-  purchaseSummary: Course[] = [];
-  notificationMessage: string = '';
-  showNotification: boolean = false;
+  panier: any = null;
+  coursMap: { [key: number]: Course } = {};
+  afficherModale = false;
+  resumeAchat: Course[] = [];
+  messageNotification: string = '';
+  afficherNotification: boolean = false;
 
   constructor(
-    private cartService: CartService,
-    private coursesService: CoursesService,
-    private datePipe: DatePipe
+    private servicePanier: CartService,
+    private serviceCours: CoursesService,
+    private formatteurDate: DatePipe
   ) {}
 
+  /**
+   * Initialise le composant et charge le contenu du panier.
+   */
   ngOnInit() {
-    this.loadCart();
+    this.chargerPanier();
   }
 
-  loadCart() {
-    this.cartService.getCart().subscribe((cartResponse) => {
-      this.cart = cartResponse;
-      this.loadCourseDetails();
+  /**
+   * Charge les informations du panier depuis le service.
+   */
+  chargerPanier() {
+    this.servicePanier.getCart().subscribe((reponsePanier) => {
+      this.panier = reponsePanier;
+      this.chargerDetailsCours();
     });
   }
 
-  loadCourseDetails() {
-    this.coursesService.getCourses().subscribe((response: any) => {
-      if (response && Array.isArray(response.data)) {
-        this.coursesMap = {};
-        response.data.forEach((course: Course) => {
-          this.coursesMap[course.id] = course;
+  /**
+   * Charge les détails des cours disponibles et les stocke dans un objet de correspondance.
+   */
+  chargerDetailsCours() {
+    this.serviceCours.getCourses().subscribe((reponse: any) => {
+      if (reponse && Array.isArray(reponse.data)) {
+        this.coursMap = {};
+        reponse.data.forEach((cours: Course) => {
+          this.coursMap[cours.id] = cours;
         });
       } else {
-        console.error("Les cours récupérés ne sont pas un tableau :", response);
+        console.error('Les cours récupérés ne sont pas un tableau :', reponse);
       }
     });
   }
 
-  removeFromCart(courseId: number) {
-    this.cartService.removeCourseFromCart(courseId).subscribe(() => {
-      this.loadCart();
+  /**
+   * Supprime un cours du panier.
+   * @param idCours Identifiant du cours à supprimer du panier.
+   */
+  retirerDuPanier(idCours: number) {
+    this.servicePanier.removeCourseFromCart(idCours).subscribe(() => {
+      this.chargerPanier();
     });
   }
 
-  preparePurchaseSummary() {
-    this.purchaseSummary = this.cart.courses.map((item: { courseId: number; }) => this.coursesMap[item.courseId]);
-    this.showModal = true;
+  /**
+   * Prépare un résumé des cours avant la confirmation d'achat.
+   */
+  preparerResumeAchat() {
+    this.resumeAchat = this.panier.courses.map(
+      (item: { courseId: number }) => this.coursMap[item.courseId]
+    );
+    this.afficherModale = true;
   }
 
-  confirmPurchase() {
-    this.cartService.clearCart().subscribe(() => {
-      this.showModal = false;
-      this.cart = { courses: [] };
-      this.notificationMessage = 'Achat confirmé !';
-      this.showNotification = true;
-  
+  /**
+   * Confirme l'achat des cours présents dans le panier et vide le panier.
+   */
+  confirmerAchat() {
+    this.servicePanier.clearCart().subscribe(() => {
+      this.afficherModale = false;
+      this.panier = { courses: [] };
+      this.messageNotification = 'Achat confirmé !';
+      this.afficherNotification = true;
+
       setTimeout(() => {
-        this.showNotification = false;
+        this.afficherNotification = false;
       }, 3000);
     });
   }
 
-  closeModal() {
-    this.showModal = false;
+  /**
+   * Ferme la fenêtre modale de confirmation d'achat.
+   */
+  fermerModale() {
+    this.afficherModale = false;
   }
 
-  formatSchedule(schedule: string): string {
-    return this.datePipe.transform(schedule, 'short') || '';
+  /**
+   * Formate une date en format court.
+   * @param horaire Chaîne représentant la date et l'heure à formater.
+   * @returns La date formatée sous forme de chaîne.
+   */
+  formaterHoraire(horaire: string): string {
+    return this.formatteurDate.transform(horaire, 'short') || '';
   }
 
-  calculateTotalPrice(): number {
-    return this.cart.courses.reduce((total: number, item: { courseId: number; }) => {
-      const course = this.coursesMap[item.courseId];
-      return total + course.price;
+  /**
+   * Calcule le prix total des cours présents dans le panier.
+   * @returns Le prix total des cours sélectionnés.
+   */
+  calculerPrixTotal(): number {
+    return this.panier.courses.reduce((total: number, item: { courseId: number }) => {
+      const cours = this.coursMap[item.courseId];
+      return total + cours.price;
     }, 0);
   }
 }

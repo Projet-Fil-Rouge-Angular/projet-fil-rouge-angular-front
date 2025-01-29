@@ -1,12 +1,15 @@
+/**
+ * Interface représentant un cours.
+ */
 export interface Course {
-    id: number;
-    name: string;
-    description: string;
-    duration: number;
-    contentMarkdown: string;
-    imageUrl: string;
-    level: string;
-    prerequisites: string[];
-    tags: string[];
-    price: number;
+  id: number;
+  name: string;
+  description: string;
+  duration: number;
+  contentMarkdown: string;
+  imageUrl: string;
+  level: string;
+  prerequisites: string[];
+  tags: string[];
+  price: number;
 }

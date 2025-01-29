@@ -16,12 +16,7 @@ import { CartComponent } from './features/cart/cart.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CourseDetailedComponent,
-    HomeComponent,
-    CartComponent,
-  ],
+  declarations: [AppComponent, CourseDetailedComponent, HomeComponent, CartComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -30,12 +25,9 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     CoursesModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
-    SharedModule
+    SharedModule,
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
-
+export class AppModule {}

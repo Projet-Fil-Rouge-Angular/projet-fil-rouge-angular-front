@@ -13,11 +13,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
   estConnecte: boolean = false;
   roleUtilisateur: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   /**
    * Initialise le composant en souscrivant aux changements d'état d'authentification.

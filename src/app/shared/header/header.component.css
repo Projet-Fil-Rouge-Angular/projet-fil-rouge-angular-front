@@ -15,7 +15,8 @@ nav {
   max-width: 1200px;
 }
 
-.nav-left, .nav-right {
+.nav-left,
+.nav-right {
   display: flex;
   align-items: center;
 }

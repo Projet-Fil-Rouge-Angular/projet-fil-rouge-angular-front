@@ -1,31 +1,26 @@
-<div class="dashboard-container">  
-    <section class="dashboard-content">
-      <h2>Gestion des Cours</h2>
-  
-      <div class="course-list">
-        <div *ngFor="let course of courses" class="course-card">
-          <h3>{{ course.name }}</h3>
-          <p>{{ course.description }}</p>
-          <div class="actions">
-            <button class="edit-btn" (click)="editCourse(course)">Modifier</button>
-            <button class="delete-btn" (click)="deleteCourse(course.id)">Supprimer</button>
-          </div>
+<div class="dashboard-container">
+  <section class="dashboard-content">
+    <h2>Gestion des Cours</h2>
+
+    <div class="course-list">
+      <div *ngFor="let course of cours" class="course-card">
+        <h3>{{ course.name }}</h3>
+        <p>{{ course.description }}</p>
+        <div class="actions">
+          <button class="edit-btn" (click)="modifierCours(course)">Modifier</button>
+          <button class="delete-btn" (click)="supprimerCours(course.id)">Supprimer</button>
         </div>
       </div>
-  
-      <button class="add-course-btn" (click)="addCourse()">Ajouter un nouveau cours</button>
-    </section>
-  
-    <app-modal
-      *ngIf="showModal"
-      [title]="modalTitle"
-      (close)="closeModal()"
-    >
-      <app-course-form
-        [course]="selectedCourse"
-        (save)="saveCourse($event)"
-        (cancel)="closeModal()"
-      ></app-course-form>
-    </app-modal>
-  </div>
-  
+    </div>
+
+    <button class="add-course-btn" (click)="ajouterCours()">Ajouter un nouveau cours</button>
+  </section>
+
+  <app-modal *ngIf="afficherModale" [title]="titreModale" (fermer)="fermerModale()">
+    <app-course-form
+      [cours]="coursSelectionne"
+      (enregistrer)="enregistrerCours($event)"
+      (annuler)="fermerModale()"
+    ></app-course-form>
+  </app-modal>
+</div>
