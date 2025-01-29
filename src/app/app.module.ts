@@ -9,31 +9,25 @@ import { AuthInterceptor } from './core/interceptors/auth/auth.interceptor';
 import { AppComponent } from './app.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { CourseDetailedComponent } from './features/course-detailed/course-detailed.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './features/home/home.component';
 import { CoursesModule } from './features/courses/courses.module';
+import { CommonModule } from '@angular/common';
+import { CartComponent } from './features/cart/cart.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CourseDetailedComponent,
-    HeaderComponent,
-    FooterComponent,
-    HomeComponent,
-  ],
+  declarations: [AppComponent, CourseDetailedComponent, HomeComponent, CartComponent],
   imports: [
     BrowserModule,
     FormsModule,
+    CommonModule,
     HttpClientModule,
     AppRoutingModule,
     CoursesModule,
-    MarkdownModule.forRoot({ loader: HttpClient })
+    MarkdownModule.forRoot({ loader: HttpClient }),
+    SharedModule,
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
-
+export class AppModule {}

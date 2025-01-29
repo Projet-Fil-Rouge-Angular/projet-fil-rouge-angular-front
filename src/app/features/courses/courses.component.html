@@ -1,24 +1,35 @@
 <div class="courses-container">
   <h1>Liste des Cours Disponibles</h1>
+
+  <input
+    type="text"
+    class="search-bar"
+    placeholder="Rechercher un cours..."
+    [(ngModel)]="recherche"
+    (input)="filtrerCours()"
+  />
+
   <p>
-    Découvrez nos cours soigneusement conçus pour vous aider à atteindre vos
-    objectifs. Chaque cours est enrichi de contenu et adapté à votre niveau.
-  </p>
-  <p>
-    Que vous soyez débutant, intermédiaire ou avancé, vous trouverez un cours
-    qui répond à vos besoins.
+    Découvrez nos cours soigneusement conçus pour vous aider à atteindre vos objectifs. Chaque cours
+    est enrichi de contenu et adapté à votre niveau.
   </p>
 
   <div class="courses-list">
     <app-course-card
-      *ngFor="let course of courses"
-      [course]="course"
-    ></app-course-card>
+      *ngFor="let cours of coursFiltres"
+      [course]="cours"
+      (coursAjouteAuPanier)="afficherMessageNotification($event)"
+    >
+    </app-course-card>
   </div>
 
   <p>
-    Vous souhaitez en savoir plus sur nos programmes ? Cliquez sur "Voir les
-    détails" pour explorer le contenu complet de chaque cours. Profitez d'une
-    expérience d'apprentissage inégalée avec nos formateurs experts.
+    Vous souhaitez en savoir plus sur nos programmes ? Cliquez sur "Voir les détails" pour explorer
+    le contenu complet de chaque cours.
   </p>
 </div>
+
+<app-notification
+  [message]="messageNotification"
+  [estVisible]="afficherNotification"
+></app-notification>

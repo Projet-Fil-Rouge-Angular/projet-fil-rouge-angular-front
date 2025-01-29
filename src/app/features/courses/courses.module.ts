@@ -5,20 +5,11 @@ import { RouterModule } from '@angular/router';
 
 import { CoursesComponent } from './courses.component';
 import { CourseCardComponent } from './course-card/course-card.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
-  declarations: [
-    CoursesComponent,
-    CourseCardComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-  ],
-  exports: [
-    CoursesComponent,
-    CourseCardComponent,
-  ],
+  declarations: [CoursesComponent, CourseCardComponent],
+  imports: [CommonModule, FormsModule, RouterModule, SharedModule],
+  exports: [CoursesComponent, CourseCardComponent],
 })
 export class CoursesModule {}

@@ -1,80 +1,106 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Course } from '../../../core/models/courses/course.model';
-import { DurationUnit } from '../../../core/models/courses/duration_unit.enum';
 
+/**
+ * Composant permettant de gérer le formulaire d'ajout et de modification d'un cours.
+ */
 @Component({
   selector: 'app-course-form',
   standalone: false,
   templateUrl: './course-form.component.html',
   styleUrls: ['./course-form.component.css'],
 })
-export class CourseFormComponent {
-  @Input() course: Course | null = null;
-  @Output() save = new EventEmitter<Course>();
-  @Output() cancel = new EventEmitter<void>();
+export class CourseFormComponent implements OnChanges {
+  @Input() cours: Course | null = null;
+  @Output() enregistrer = new EventEmitter<Course>();
+  @Output() annuler = new EventEmitter<void>();
 
-  formData: Course = {
+  donneesFormulaire: Course = {
     id: 0,
     name: '',
     description: '',
     duration: 0,
-    durationUnit: DurationUnit.Heure,
     contentMarkdown: '',
     imageUrl: '',
     level: '',
     prerequisites: [],
     tags: [],
+    price: 0,
   };
+  saisieTag = '';
+  saisiePrerequis = '';
 
-  tagInput = '';
-  prerequisiteInput = '';
-
+  /**
+   * Met à jour les données du formulaire si un cours est sélectionné pour modification.
+   */
   ngOnChanges(): void {
-    if (this.course) {
-      this.formData = { ...this.course };
+    if (this.cours) {
+      this.donneesFormulaire = { ...this.cours };
     }
   }
 
-  addTag(): void {
-    if (this.tagInput) {
-      this.formData.tags.push(this.tagInput);
-      this.tagInput = '';
+  /**
+   * Ajoute un tag à la liste des tags du cours.
+   */
+  ajouterTag(): void {
+    if (this.saisieTag) {
+      this.donneesFormulaire.tags.push(this.saisieTag);
+      this.saisieTag = '';
     }
   }
 
-  removeTag(index: number): void {
-    this.formData.tags.splice(index, 1);
+  /**
+   * Supprime un tag de la liste des tags du cours.
+   * @param index Position du tag à supprimer.
+   */
+  supprimerTag(index: number): void {
+    this.donneesFormulaire.tags.splice(index, 1);
   }
 
-  addPrerequisite(): void {
-    if (this.prerequisiteInput) {
-      this.formData.prerequisites.push(this.prerequisiteInput);
-      this.prerequisiteInput = '';
+  /**
+   * Ajoute un prérequis à la liste des prérequis du cours.
+   */
+  ajouterPrerequis(): void {
+    if (this.saisiePrerequis) {
+      this.donneesFormulaire.prerequisites.push(this.saisiePrerequis);
+      this.saisiePrerequis = '';
     }
   }
 
-  removePrerequisite(index: number): void {
-    this.formData.prerequisites.splice(index, 1);
+  /**
+   * Supprime un prérequis de la liste des prérequis du cours.
+   * @param index Position du prérequis à supprimer.
+   */
+  supprimerPrerequis(index: number): void {
+    this.donneesFormulaire.prerequisites.splice(index, 1);
   }
-  isFormValid(): boolean {
+
+  /**
+   * Vérifie si le formulaire est valide.
+   * @returns `true` si le formulaire est valide, `false` sinon.
+   */
+  formulaireEstValide(): boolean {
     return (
-      !!this.formData.name &&
-      !!this.formData.description &&
-      this.formData.duration >= 1 &&
-      !!this.formData.contentMarkdown &&
-      !!this.formData.imageUrl &&
-      !!this.formData.level &&
-      this.formData.prerequisites.length > 0 &&
-      this.formData.tags.length > 0
+      !!this.donneesFormulaire.name &&
+      !!this.donneesFormulaire.description &&
+      this.donneesFormulaire.duration >= 1 &&
+      !!this.donneesFormulaire.contentMarkdown &&
+      !!this.donneesFormulaire.imageUrl &&
+      !!this.donneesFormulaire.level &&
+      this.donneesFormulaire.prerequisites.length > 0 &&
+      this.donneesFormulaire.tags.length > 0 &&
+      this.donneesFormulaire.price >= 1
     );
   }
 
+  /**
+   * Soumet le formulaire et émet l'événement avec un objet `Course`.
+   */
   onSubmit(): void {
-    if (!this.isFormValid()) {
+    if (!this.formulaireEstValide()) {
       alert('Veuillez remplir tous les champs correctement.');
       return;
     }
-    console.log(this.formData);
-    this.save.emit(this.formData);
+    this.enregistrer.emit({ ...this.donneesFormulaire });
   }
 }

@@ -7,9 +7,7 @@ import { CourseFormComponent } from './course-form/course-form.component';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { FormsModule } from '@angular/forms';
 
-const routes: Routes = [
-  { path: '', component: AdminDashboardComponent, canActivate: [AuthGuard] },
-];
+const routes: Routes = [{ path: '', component: AdminDashboardComponent, canActivate: [AuthGuard] }];
 
 @NgModule({
   declarations: [AdminDashboardComponent, CourseFormComponent, ModalComponent],

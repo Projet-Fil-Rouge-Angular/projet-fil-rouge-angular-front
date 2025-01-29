@@ -1,5 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+/**
+ * Composant modal permettant d'afficher une fenêtre de dialogue avec un titre.
+ */
 @Component({
   selector: 'app-modal',
   standalone: false,
@@ -7,10 +10,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./modal.component.css'],
 })
 export class ModalComponent {
-  @Input() title = '';
-  @Output() close = new EventEmitter<void>();
+  @Input() titre: string = '';
+  @Output() fermer = new EventEmitter<void>();
 
-  closeModal() {
-    this.close.emit();
+  /**
+   * Émet l'événement `fermer` pour signaler la fermeture du modal.
+   */
+  fermerModal() {
+    this.fermer.emit();
   }
 }

@@ -5,8 +5,12 @@
   </div>
   <div class="course-card-content">
     <p>{{ course.description }}</p>
+    <p>{{ course.price }} €</p>
   </div>
   <div class="course-card-actions">
-    <button [routerLink]="['/courses', course.id]">Voir les détails</button>
+    <button class="course-details" [routerLink]="['/courses', course.id]">Voir les détails</button>
+    <button *ngIf="utilisateurConnecte" class="course-add" (click)="ajouterAuPanier()">
+      Ajouter au panier
+    </button>
   </div>
 </div>

@@ -1,20 +1,68 @@
 header {
   background-color: #007bff;
   color: white;
-  padding: 10px;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.logo:hover {
+  opacity: 0.8;
 }
 
 nav a {
   color: white;
   margin: 0 15px;
   text-decoration: none;
-  display: flex;
-  align-items: center;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
 nav a:hover {
+  text-decoration: underline;
+}
+
+.cart-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cart-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.cart-button:hover {
   text-decoration: underline;
 }
 
@@ -24,14 +72,23 @@ button {
   color: white;
   cursor: pointer;
   margin-left: 15px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 button:hover {
   text-decoration: underline;
 }
 
-.cart-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
+.logout-btn {
+  margin-left: 15px;
+}
+
+.login-btn {
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.login-btn:hover {
+  text-decoration: underline;
 }

@@ -3,24 +3,30 @@ import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from '../../core/services/courses/courses.service';
 import { Course } from '../../core/models/courses/course.model';
 
+/**
+ * Composant affichant les détails d'un cours spécifique.
+ */
 @Component({
   selector: 'app-course-detailed',
   standalone: false,
   templateUrl: './course-detailed.component.html',
-  styleUrls: ['./course-detailed.component.css']
+  styleUrls: ['./course-detailed.component.css'],
 })
 export class CourseDetailedComponent implements OnInit {
-  course: Course | null = null;
+  cours: Course | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private coursesService: CoursesService
+    private serviceCours: CoursesService
   ) {}
 
+  /**
+   * Initialise le composant et charge les détails du cours sélectionné.
+   */
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id')!;
-    this.coursesService.getCourse(id).subscribe((response: any) => {
-      this.course = response.data;
+    const identifiant = +this.route.snapshot.paramMap.get('id')!;
+    this.serviceCours.getCourse(identifiant).subscribe((reponse: any) => {
+      this.cours = reponse.data;
     });
   }
 }
